@@ -1,0 +1,14 @@
+#PBS -l nodes=1:ppn=1
+#PBS -l walltime=00:30:00
+#PBS -N emilyKeywordScrape
+#PBS -j oe
+
+cd /users/a/r/areagan/fun/twitter/keyword-searches/emily
+
+for MINUTE in 00 15 30 45
+do
+  echo "processing ${DATE}-${HOUR}-${MINUTE}"
+  /usr/bin/time -v gzip -cd /users/c/d/cdanfort/scratch/twitter/tweet-troll/zipped-raw/${DATE}/${DATE}-${HOUR}-${MINUTE}.gz | python processTweetsNew.py "${DATE}"
+  echo "done"
+done
+echo "delete me"
